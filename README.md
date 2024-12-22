@@ -18,12 +18,8 @@ You can install packages on Linux or Windows using the `install_package` functio
 
 #### Example:
 
-rust
-
-Copy code
-
 ```rust
-use wrenchlib::tasks::install_package;
+use wrenchlib::tasks::install::install_package;
 
 fn main() {
     let package_name = "curl";
