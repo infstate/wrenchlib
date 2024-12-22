@@ -126,3 +126,11 @@ Future features planned for this library:
 | ----------- | ------- | ---------------- |
 | Stable      | 0.0.0   | [In Development] |
 | Development | 0.1.0   |                  |
+
+---
+
+## Part of Infinite's Code Charity 2025 Event
+
+![CharityBanner](docs/assets/BannerCharity.jpg)
+
+# Join and Contribute!
