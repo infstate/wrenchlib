@@ -22,17 +22,39 @@ rust
 
 Copy code
 
-`use wrenchlib::tasks::install::install_package;  fn main() {     let package_name = "curl";          match install_package(package_name) {         Ok(_) => println!("Successfully installed the package!"),         Err(e) => eprintln!("Failed to install the package: {}", e),     } }`
+```rust
+use my_library::tasks::install_package;
+
+fn main() {
+    let package_name = "curl";
+
+    match install_package(package_name) {
+        Ok(_) => println!("Successfully installed the package!"),
+        Err(e) => eprintln!("Failed to install the package: {}", e),
+    }
+}
+```
 
 ### Privilege Escalation
 
 The library can handle privilege escalation for system-level tasks like installing packages.
 
-rust
+```rust
+use my_library::utils::privilege::{detect_privilege_tool, run_as_privileged};
 
-Copy code
-
-`use wrenchlib::utils::privilege::{detect_privilege_tool, run_as_privileged};  fn main() {     if let Some(tool) = detect_privilege_tool() {         println!("Detected privilege tool: {}", tool);         let result = run_as_privileged("apt", &["install", "-y", "curl"]);         match result {             Ok(_) => println!("Package installed successfully."),             Err(e) => eprintln!("Error: {}", e),         }     } else {         eprintln!("No privilege tool found (e.g., 'sudo' or 'doas').");     } }`
+fn main() {
+    if let Some(tool) = detect_privilege_tool() {
+        println!("Detected privilege tool: {}", tool);
+        let result = run_as_privileged("apt", &["install", "-y", "curl"]);
+        match result {
+            Ok(_) => println!("Package installed successfully."),
+            Err(e) => eprintln!("Error: {}", e),
+        }
+    } else {
+        eprintln!("No privilege tool found (e.g., 'sudo' or 'doas').");
+    }
+}
+```
 
 ---
 
