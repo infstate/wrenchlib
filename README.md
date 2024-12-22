@@ -23,7 +23,7 @@ rust
 Copy code
 
 ```rust
-use my_library::tasks::install_package;
+use wrenchlib::tasks::install_package;
 
 fn main() {
     let package_name = "curl";
@@ -40,7 +40,7 @@ fn main() {
 The library can handle privilege escalation for system-level tasks like installing packages.
 
 ```rust
-use my_library::utils::privilege::{detect_privilege_tool, run_as_privileged};
+use wrenchlib::utils::privilege::{detect_privilege_tool, run_as_privileged};
 
 fn main() {
     if let Some(tool) = detect_privilege_tool() {
