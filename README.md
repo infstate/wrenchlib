@@ -3,7 +3,7 @@
 
 # wrenchlib
 
-![CharityBanner](docs/assets/Wrenchlib.svg)
+![CharityBanner](docs/assets/Wrenchlib-light.svg)
 
 <div align="center">
 
