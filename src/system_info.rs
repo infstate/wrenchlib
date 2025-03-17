@@ -1,7 +1,13 @@
+use crate::os::WinPkgMgrs;
+
+#[cfg(target_os = "linux")]
 #[derive(Debug)]
 pub struct SystemInfo {
-    pub os: String,
     pub package_manager: Option<String>,
-    pub gpu: Option<String>,
-    pub kernel_version: Option<String>,
+}
+
+#[cfg(target_os = "windows")]
+#[derive(Debug)]
+pub struct SystemInfo {
+    pub package_manager: Option<WinPkgMgrs>,
 }

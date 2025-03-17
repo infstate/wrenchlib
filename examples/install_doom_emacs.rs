@@ -7,7 +7,7 @@ use wrenchlib::tasks::install::install_package;
 
 fn ensure_git_installed() {
     let package_name = "git";
-    match install_package(package_name, WinPkgMgrs::Scoop) {
+    match install_package(package_name, Some(WinPkgMgrs::Scoop)) {
         Ok(_) => println!("Successfully installed {}.", package_name),
         Err(e) => panic!("Failed to install {}: {}", package_name, e),
     }
@@ -21,7 +21,7 @@ fn add_scoop_bucket() {
 
 fn install_emacs() {
     let package_name = "git emacs ripgrep fd llvm";
-    match install_package(package_name, WinPkgMgrs::Scoop) {
+    match install_package(package_name, Some(WinPkgMgrs::Scoop)) {
         Ok(_) => println!("Successfully installed {}.", package_name),
         Err(e) => panic!("Failed to install {}: {}", package_name, e),
     }
