@@ -1,14 +1,25 @@
+> [!TIP]
+> Major Release 1.2 Is out! 🎉
+
 # wrenchlib
+
+<div align="center">
 
 A library for creating fast system configuration utilities written in Rust 🦀
 
+</div>
+
 ## Features
 
-- **Cross-Platform Support**: Works on both Linux and Windows.
-- **Package Installation**: Automatically detects the package manager for Linux (e.g., `apt`, `pacman`, `dnf`) and uses `winget` on Windows.
-- **Privilege Escalation**: Supports `sudo` and `doas` for Linux, and checks for administrative rights on Windows.
-- **System Information Collection**: Helps gather essential system info for automating debloating and other tasks.
-- **Flexible API**: Simple and easy-to-use API for developers to integrate into their own tools.
+- **Minimal**: The library doesn't have any external depencices. (I will try to keep it that way)
+- **Custom Git clone function**: Custom git function in case you need it to install dotfiles etc.
+- **Use alternative pkg managers!**: The library can install package managers for Windows
+- **Manage Scoop Buckets**: You can add scoop buckets, the library includes a custom type
+- **Install Packages**: Automatically detects platform and package manager.
+- **Networking**: Has helper functions to download files through various methods.
+- **Cross-Platform Support**: Compatiable with Linux, Windows, and eventually MacOS
+- **Flexible API Frontend**: Simple and easy-to-use API for developers to integrate into their own tools.
+- **Distro-Agnostic**: Automatically detects your package manager and distro on Linux
 
 ## Usage
 
@@ -22,33 +33,57 @@ You can install packages on Linux or Windows using the `install_package` functio
 use wrenchlib::tasks::install::install_package;
 
 fn main() {
-    let package_name = "curl";
+    let package_name = "ollama";
 
-    match install_package(package_name) {
+    match install_package(package_name, None) { // Easy front-end, works both Windows and Linux without worrying about
         Ok(_) => println!("Successfully installed the package!"),
         Err(e) => eprintln!("Failed to install the package: {}", e),
     }
 }
 ```
 
-### Privilege Escalation
-
-The library can handle privilege escalation for system-level tasks like installing packages.
+## Don't want to use the default package manager?
 
 ```rust
-use wrenchlib::utils::privilege::{detect_privilege_tool, run_as_privileged};
+use wrenchlib::tasks::install::install_package;
 
 fn main() {
-    if let Some(tool) = detect_privilege_tool() {
-        println!("Detected privilege tool: {}", tool);
-        let result = run_as_privileged("apt", &["install", "-y", "curl"]);
-        match result {
-            Ok(_) => println!("Package installed successfully."),
-            Err(e) => eprintln!("Error: {}", e),
-        }
-    } else {
-        eprintln!("No privilege tool found (e.g., 'sudo' or 'doas').");
+    let package_name = "obs-studio";
+                                        //Select your favorite pkg mgr!
+    match install_package(package_name, Some(wrenchlib::os::WinPkgMgrs::Scoop)) {
+        Ok(_) => println!("Successfully installed the package!"),
+        Err(e) => eprintln!("Failed to install the package: {}", e),
     }
+}
+```
+
+# Managing scoop buckets on Windows
+
+```rust
+use wrenchlib::os::windows::scoop_add_bucket;
+use wrenchlib::os::windows::ScoopBucket;
+fn main() {
+    match scoop_add_bucket(ScoopBucket::Extras) {
+        Ok(_) => println!("Successfully added bucket."),
+        Err(e) => panic!("Failed to add bucket: {}", e),
+    }
+}
+```
+
+Use the custom type to select which bucket to add! **(See it yourself in [windows.rs](/src/os/windows.rs))**
+
+```rust
+pub enum ScoopBucket {
+    Main,
+    Extras,
+    Versions,
+    Nirsoft,
+    Sysinternals,
+    Php,
+    NerdFonts,
+    Nonportable,
+    Java,
+    Games,
 }
 ```
 
@@ -57,7 +92,7 @@ fn main() {
 ## Supported Platforms
 
 - **Linux**: Supports all major Linux distributions with package managers like `apt`, `pacman`, `dnf`, etc.
-- **Windows**: Uses `winget` for package management.
+- **Windows**: Defaults to Winget but supports Scoop and Chocolatey too.
 
 ---
 
@@ -83,6 +118,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - Ensure that the appropriate package manager or privilege tool (e.g., `sudo`, `doas`, or `winget`) is installed on the system before using the library.
 - On Windows, make sure you have `winget` installed and properly configured.
+- If any package manager is not installed, Wrenchlib will prompt you for permission to install it.
 
 ### Troubleshooting
 
@@ -107,8 +143,6 @@ This library supports both `sudo` and `doas` for executing commands with elevate
 - `sudo` is installed and configured correctly, or
 - `doas` is installed with the necessary permissions configured in `/etc/doas.conf`.
 
-If neither tool is available, the library can generate a script (`install.sh`) that you can execute manually with root privileges.
-
 ---
 
 ## Roadmap
@@ -125,7 +159,7 @@ Future features planned for this library:
 | Branch      | Version |                  |
 | ----------- | ------- | ---------------- |
 | Stable      | 0.0.0   | [In Development] |
-| Development | 0.1.0   |                  |
+| Development | 0.2.0   |                  |
 
 ---
 
