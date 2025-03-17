@@ -5,7 +5,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="/docs/assets/Wrenchlib.svg">
-  <img alt="wrenchlib logo" src="/docs/assets/Wrenchlib-light.svg" width="50%" height="50%">
+  <img alt="wrenchlib logo" src="/docs/assets/Wrenchlib-light.svg">
 </picture>
 
 <div align="center">
