@@ -4,8 +4,8 @@
 # wrenchlib
 
 <picture>
-  <source media="(prefers-color-scheme: light)" srcset="/docs/assets/Wrenchlib-light.svg">
-  <img alt="wrenchlib logo" src="/docs/assets/Wrenchlib.svg" width="50%" height="50%">
+  <source media="(prefers-color-scheme: light)" srcset="/docs/assets/Wrenchlib.svg">
+  <img alt="wrenchlib logo" src="/docs/assets/Wrenchlib-light.svg" width="50%" height="50%">
 </picture>
 
 <div align="center">
