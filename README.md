@@ -1,8 +1,9 @@
 > [!TIP]
 > Major Release 1.2 Is out! 🎉
 
-
 # wrenchlib
+
+![CharityBanner](docs/assets/Wrenchlib.svg)
 
 <div align="center">
 
