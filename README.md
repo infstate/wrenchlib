@@ -3,7 +3,10 @@
 
 # wrenchlib
 
-![CharityBanner](docs/assets/Wrenchlib-light.svg)
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="/docs/assets/Wrenchlib-light.svg">
+  <img alt="wrenchlib logo" src="/docs/assets/Wrenchlib.svg" width="50%" height="50%">
+</picture>
 
 <div align="center">
 
