@@ -1,7 +1,6 @@
-<div align="center">
 > [!TIP]
 > Major Release 1.2 Is out! 🎉
-</div>
+
 
 # wrenchlib
 
